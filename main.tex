@@ -1,0 +1,164 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out
+                                                          % if you need a4paper
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                          % paper
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{blindtext}
+\usepackage{scrextend}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{upgreek}
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage[export]{adjustbox}
+\usepackage[colorinlistoftodos]{todonotes}
+\IEEEoverridecommandlockouts                              
+\overrideIEEEmargins
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{\LARGE \bf
+ZKU – Cohort 4 (Jul-Aug 2022)\\Week 2: Merkle for Privacy\\Assignment \sharp 2}
+
+% \author{Iskander Andrews\\\faIcon{discord} Isk#0996}
+\author{Iskander Andrews$^{1}$% <-this % stops a space
+\thanks{\faIcon[regular]{envelope} \tt\small iskander.s.andrews@gmail.com}
+\thanks{\faIcon{discord} \tt\small Isk#0996}
+\thanks{\faIcon{github} \tt\small iskdrews}}
+
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+This document is for answering ZKUC04, Week-1, Introduction to ZKP Assignment.
+It consists of three main parts.
+\begin{labeling}{alligator}
+\item [\textbf{Part 1:}] Part 1 Hashes and Merkle Tree.
+\item [\textbf{Part 2:}] Part 2 Tornado Cash.
+\item [\textbf{Part 3:}] Part 3 Semaphore.
+\end{labeling}
+
+The total number of questions and points is $6$, including the bonus questions. 
+\end{abstract}
+
+\noindent\rule{8cm}{0.4pt}
+
+\section{\textbf{\underline{Part 1:}} Hashes and Merkle Tree}
+\subsection{\textbf{\underline{Question (1}}}
+\subsubsection{\textbf{\underline{1.1} Compare the four hashes and provide explanations in four different aspects: \\ 
+- Gas cost. \\ 
+- Capacity.\\ 
+- Proof generation efficiency.\\
+- Proof size.}}
+
+% \begin{tabular}{|c|c|c|c|c|}  
+%     \cline{2-5}
+%     \multicolumn{1}{c|}{} & SHA256 & MiMC & Poseidon & Pedersen \\
+%     \hline
+%     Gas Cost & \cmark & \cmark & \cmark & \cmark \\
+%     \hline
+%     Capacity & \cmark & \xmark & \cmark & \cmark \\
+%     \hline
+%     Proof generation efficiency & \xmark & \cmark & \xmark & \cmark \\
+%     \hline
+%     Proof size & \xmark & \cmark & \xmark & \cmark \\
+%     \hline
+% \end{tabular}
+
+\begin{tabular}{|c|c|}  
+    \cline{2-5}
+    \hline
+    Gas Cost & \cmark \\
+    \hline
+    Capacity & \cmark  \\
+    \hline
+    Proof generation efficiency & \xmark  \\
+    \hline
+    Proof size & \xmark \\
+    \hline
+\end{tabular}
+
+\noindent\rule{8cm}{0.4pt}
+
+\section{\textbf{\underline{Part 2:}} Tornado Cash}
+\subsection{\textbf{\underline{Question (1)}}}
+\subsubsection{\textbf{\underline{2.1} How is Tornado Cash Nova different from Tornado Cash Classic? What are the key upgrades/improvements, and what changes in the technical design make these possible?}}
+
+The main significant difference between both is that with Tornado Nova, user can deposit/withdraw arbitrary amounts of ETH, before with Tornado Classic, the user to deposit/withdraw a fixed amount of a given token within each pool. 
+
+Also, users will be able to transfer amount of their deposited token, to another address without the need to withdraw them from the pool. 
+
+Tornado Cash Nova uses Gnosis Chain as a Layer2, which allows for cheaper fees with fast transctions, and it as a L2 is much faster with dealing with Mainnet compared to 3hours on Polygon \& $\backsim 7$  days on Optimism or Arbitrum. 
+
+
+\subsection{\textbf{\underline{Question (2)}}}
+\subsubsection{\textbf{\underline{2.2} What is the role of the relayers in the Tornado Cash protocols? Why are relayers needed?}}
+
+Relayers are from the essentials parts of Tornado Cash, they are recommended to be used in order to preserve privacy while paying gas fees to do ETH transfer transactions, because otherwise if user choose to connect with the wallet, this payment of gas fees can compromise the anonymity of the user. 
+They are acting as a third party, for managing the entire withdrawing process. \cite{c1} 
+
+\noindent\rule{8cm}{0.4pt}
+
+\section{\textbf{\underline{Part 3:}} Semaphore}
+
+\subsection{\textbf{}\underline{Question (1)}}
+\subsubsection{\textbf{What is Semaphore? Explain in 4-8 sentences how it works.}}
+
+\subsection{\textbf{\underline{Question (3)}}}
+\subsubsection{\textbf{How does Semaphore prevent double signing (or double withdrawal in the case of mixers)? Explain the mechanism in 4-8 sentences.}}
+
+\subsection{\textbf{\underline{Question (3)}}}
+\subsubsection{\textbf{A lot of applications have already been built based on derivations from Semaphore, such as for voting (e.g. AnonyVote), survey or opinion (e.g. Ninja Survey, zkAsk), and authentication (e.g. InterRep, Continuum, zkPayroll). Can you suggest two more ideas for ZK applications that can be built upon Semaphore?}}
+
+\noindent\rule{8cm}{0.4pt}
+\newpage
+
+\section*{ACKNOWLEDGMENT}
+I would like to thank so much Heather @Giveth who told me to register in this great course, and would like to thank hadzija#0842 and cs#6500 for their great help and support. I am really thankful to them to everyone working behind the science to create, maintain, review, manage, and produce this great ZKP course, I see great efforts. 
+
+\noindent\rule{8cm}{0.4pt}
+\begin{thebibliography}{99}
+
+\bibitem{c1} Tornado Cash Docs. \href{https://docs.tornado.cash/general/how-to-become-a-relayer}{\underline{link}}
+\end{thebibliography}
+
+\end{document}
