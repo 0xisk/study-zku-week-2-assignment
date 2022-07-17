@@ -14,6 +14,7 @@
 \usepackage{fontawesome5}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{enumitem}
 \usepackage{upgreek}
 \usepackage{listings}
 \usepackage{amssymb}
@@ -83,41 +84,59 @@ The total number of questions and points is $6$, including the bonus questions.
 \noindent\rule{8cm}{0.4pt}
 
 \section{\textbf{\underline{Part 1:}} Hashes and Merkle Tree}
-\subsection{\textbf{\underline{Question (1}}}
+\subsection{\textbf{\underline{Question (1)}}}
 \subsubsection{\textbf{\underline{1.1} Compare the four hashes and provide explanations in four different aspects: \\ 
 - Gas cost. \\ 
 - Capacity.\\ 
 - Proof generation efficiency.\\
 - Proof size.}}
 
-% \begin{tabular}{|c|c|c|c|c|}  
-%     \cline{2-5}
-%     \multicolumn{1}{c|}{} & SHA256 & MiMC & Poseidon & Pedersen \\
-%     \hline
-%     Gas Cost & \cmark & \cmark & \cmark & \cmark \\
-%     \hline
-%     Capacity & \cmark & \xmark & \cmark & \cmark \\
-%     \hline
-%     Proof generation efficiency & \xmark & \cmark & \xmark & \cmark \\
-%     \hline
-%     Proof size & \xmark & \cmark & \xmark & \cmark \\
-%     \hline
-% \end{tabular}
-
-\begin{tabular}{|c|c|}  
-    \cline{2-5}
-    \hline
-    Gas Cost & \cmark \\
-    \hline
-    Capacity & \cmark  \\
-    \hline
-    Proof generation efficiency & \xmark  \\
-    \hline
-    Proof size & \xmark \\
-    \hline
-\end{tabular}
+\begin{enumerate}
+\item \textbf{\underline{SHA256}}
+    \begin{itemize}
+        \item 
+            \begin{description}[align=left,labelwidth=3cm]
+                \item [Gas cost] some detail
+                \item [Capacity] some detail
+                \item [Proof generation efficiency]some detail 
+                \item [Proof size]some detail
+            \end{description}
+    \end{itemize}
+\item \textbf{\underline{MiMC}}
+    \begin{itemize}
+        \item 
+            \begin{description}[align=left,labelwidth=3cm]
+                \item [Gas cost] some detail
+                \item [Capacity] some detail
+                \item [Proof generation efficiency]some detail 
+                \item [Proof size]some detail
+            \end{description}
+    \end{itemize}
+\item \textbf{\underline{Poseidon}}
+    \begin{itemize}
+        \item 
+            \begin{description}[align=left,labelwidth=3cm]
+                \item [Gas cost] some detail
+                \item [Capacity] some detail
+                \item [Proof generation efficiency]some detail 
+                \item [Proof size]some detail
+            \end{description}
+    \end{itemize}
+\item \textbf{\underline{Pedersen}}
+    \begin{itemize}
+        \item 
+            \begin{description}[align=left,labelwidth=3cm]
+                \item [Gas cost] some detail
+                \item [Capacity] some detail
+                \item [Proof generation efficiency]some detail 
+                \item [Proof size]some detail
+            \end{description}
+    \end{itemize}
+\end{enumerate}
 
 \noindent\rule{8cm}{0.4pt}
+
+\newpage
 
 \section{\textbf{\underline{Part 2:}} Tornado Cash}
 \subsection{\textbf{\underline{Question (1)}}}
@@ -136,6 +155,9 @@ Tornado Cash Nova uses Gnosis Chain as a Layer2, which allows for cheaper fees w
 Relayers are from the essentials parts of Tornado Cash, they are recommended to be used in order to preserve privacy while paying gas fees to do ETH transfer transactions, because otherwise if user choose to connect with the wallet, this payment of gas fees can compromise the anonymity of the user. 
 They are acting as a third party, for managing the entire withdrawing process. \cite{c1} 
 
+\subsection{\textbf{\underline{Question (4) [Bonus]}}}
+\subsubsection{\textbf{\underline{4.1} [bonus] Try out Tornado Classic on Goerli testnet and attach screenshots at deposit and withdrawal in the PDF file.}}
+
 \noindent\rule{8cm}{0.4pt}
 
 \section{\textbf{\underline{Part 3:}} Semaphore}
@@ -143,8 +165,27 @@ They are acting as a third party, for managing the entire withdrawing process. \
 \subsection{\textbf{}\underline{Question (1)}}
 \subsubsection{\textbf{What is Semaphore? Explain in 4-8 sentences how it works.}}
 
+Semaphore is a zero-knowledge protocol system that allows any Ethereum user to prove their membership of an arbitrary string, or proving a membership in a group, without revealing their identity, revealing only that they have been approved previously to do so. 
+
+Semaphore consists of two main components: 
+\begin{enumerate}
+    \item The smart contract, which store the identity, controls the state, permissions, and verification of the off-chain generated proofs.
+    \item The zero-knowledge proof components, which work off-chain, which is responsible for generating the proof for the users, and therefore allow the smart-contracts to update their state, if those proofs are verified to be valid. \cite{c2} \cite{c3}
+\end{enumerate}
+
 \subsection{\textbf{\underline{Question (3)}}}
 \subsubsection{\textbf{How does Semaphore prevent double signing (or double withdrawal in the case of mixers)? Explain the mechanism in 4-8 sentences.}}
+
+\begin{itemize}
+    \item Preventing the double signalling: 
+        \begin{enumerate}
+            \item The users register first their identity by doing an identity commitment, which is equal to the hash of the \texttt{pk: the user's EdDSA public key}, \texttt{in: identity nullifier}, \texttt{it: identity trapdoor}. And then proof the current merkle root, with the generated merkle root of the merkle path with the generated identity commitment.  
+            \item Then users can do their first transaction safly with an \texttt{en: external nullifier}, and the contract accepts this transaction because that is the first signal. 
+            \item However, if the users tried to execute another transaction with the same \texttt{en: external nullifier}, the contract will reject it. 
+        \end{enumerate}
+    \item Preventing the double withdrawal in case of mixers:
+        
+\end{itemize}
 
 \subsection{\textbf{\underline{Question (3)}}}
 \subsubsection{\textbf{A lot of applications have already been built based on derivations from Semaphore, such as for voting (e.g. AnonyVote), survey or opinion (e.g. Ninja Survey, zkAsk), and authentication (e.g. InterRep, Continuum, zkPayroll). Can you suggest two more ideas for ZK applications that can be built upon Semaphore?}}
@@ -157,8 +198,10 @@ I would like to thank so much Heather @Giveth who told me to register in this gr
 
 \noindent\rule{8cm}{0.4pt}
 \begin{thebibliography}{99}
-
 \bibitem{c1} Tornado Cash Docs. \href{https://docs.tornado.cash/general/how-to-become-a-relayer}{\underline{link}}
+\bibitem{c2} Koh Wei Jie, To Mixers and Beyond: presenting Semaphore, a privacy gadget built on Ethereum, Sep 3, 2019.
+ \href{https://medium.com/coinmonks/to-mixers-and-beyond-presenting-semaphore-a-privacy-gadget-built-on-ethereum-4c8b00857c9b}{\underline{link}}
+\bibitem{c3} Semaphore official Docs from appliedZKP, What Is Semaphore? \href{http://semaphore.appliedzkp.org/docs/introduction}{\underline{link}}
 \end{thebibliography}
 
 \end{document}
